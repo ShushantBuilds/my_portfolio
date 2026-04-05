@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import ReactLenisProvider from "./components/ReactLenisProvider";
+import Navbar from "./components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
       <body className={`${inter.className} bg-neutral-950 text-neutral-50 antialiased selection:bg-neutral-800`}>
         {/* We wrap the content in the Lenis provider for smooth scrolling */}
         <ReactLenisProvider>
+          <Navbar/>
           {children}
         </ReactLenisProvider>
       </body>

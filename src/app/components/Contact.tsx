@@ -172,9 +172,9 @@ export default function Contact() {
       
       {/* Footer Links */}
       <div className="absolute bottom-12 flex space-x-8 text-neutral-500 font-mono text-sm uppercase tracking-widest z-20">
-        <a href="https://github.com/ShushantBABA" target="_blank" rel="noreferrer" data-magnetic="true" className="hover:text-white transition-colors">GitHub</a>
-        <a href="#" data-magnetic="true" className="hover:text-white transition-colors">LinkedIn</a>
-        <a href="#" data-magnetic="true" className="hover:text-white transition-colors">Instagram</a>
+        <a href="https://github.com/ShushantBuilds" target="_blank" rel="noreferrer" data-magnetic="true" className="hover:text-white transition-colors">GitHub</a>
+        <a href="https://www.linkedin.com/in/shushantgupta/" target="_blank" data-magnetic="true" className="hover:text-white transition-colors">LinkedIn</a>
+        {/* <a href="#" data-magnetic="true" className="hover:text-white transition-colors">Instagram</a> */}
       </div>
     </section>
   );

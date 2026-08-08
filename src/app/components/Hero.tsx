@@ -1,74 +1,87 @@
 'use client';
-import { motion } from 'framer-motion';
-
-const SplitText = ({ text, className }: { text: string, className?: string }) => {
-  return (
-    <span className={`inline-block overflow-hidden ${className}`}>
-      {text.split('').map((char, index) => (
-        <motion.span
-          key={index}
-          className="inline-block"
-          variants={{
-            hidden: { y: "110%" },
-            visible: { y: "0%" }
-          }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        >
-          {char === " " ? "\u00A0" : char}
-        </motion.span>
-      ))}
-    </span>
-  );
-};
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function Hero() {
-  return (
-    <section className="relative h-screen flex flex-col justify-center items-center overflow-hidden bg-transparent px-6">
-      
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={{ visible: { transition: { staggerChildren: 0.03, delayChildren: 2.5 } } }} 
-        className="z-10 text-center flex flex-col items-center w-full max-w-4xl"
-      >
-        <h1 data-magnetic="true" className="text-7xl md:text-[10vw] font-black tracking-tighter leading-[0.8] text-neutral-50 overflow-hidden mb-2">
-          <SplitText text="ENGINEERING" />
-        </h1>
-        
-        <h1 data-magnetic="true" className="text-7xl md:text-[10vw] font-extrabold tracking-tighter leading-[0.8] text-neutral-300 font-serif italic overflow-hidden mb-12">
-          <SplitText text="THE FUTURE" />
-        </h1>
+  const containerRef = useRef<HTMLElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
 
-        {/* 🚀 NEW: The Personal Terminal Bio Card */}
+  // --- PROFILE CARD PHYSICS ---
+  // Fades out completely and quickly by 10% scroll
+  const profileScale = useTransform(scrollYProgress, [0, 0.15], [1, 0.8]);
+  const profileOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
+  const profileY = useTransform(scrollYProgress, [0, 0.15], [0, -100]);
+  
+  // 🚀 FIX 1: Explicitly removes the profile from the DOM rendering after 15% 
+  // This guarantees absolutely no background "ghosting" or overlapping.
+  const profileDisplay = useTransform(scrollYProgress, (v) => v > 0.15 ? "none" : "flex");
+
+  // --- TEXT REVEAL PHYSICS ---
+  // Starts fading in AT 15%, strictly AFTER the profile is gone.
+  // Reaches 100% opacity at 25%, solving the "text remains transparent" bug.
+  const textOpacity = useTransform(scrollYProgress, [0.15, 0.25], [0, 1]);
+  const textY = useTransform(scrollYProgress, [0.15, 0.3], [100, 0]);
+  const textScale = useTransform(scrollYProgress, [0.15, 0.3], [0.9, 1]);
+
+  return (
+    <section ref={containerRef} className="relative h-[350vh] bg-transparent">
+      
+      <div className="sticky top-0 h-screen flex flex-col justify-center items-center overflow-hidden px-4 md:px-6">
+
+        {/* 1. THE ENLARGED PROFILE CARD */}
+        {/* 🚀 FIX 2: Lowered to z-10 so it sits behind the text. Added display: profileDisplay */}
         <motion.div
-          variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 1, delay: 3.5 } } }}
-          className="flex flex-col md:flex-row items-center md:items-start text-left gap-6 bg-neutral-900/40 backdrop-blur-md border border-white/10 p-6 rounded-3xl w-full max-w-2xl shadow-[0_0_30px_rgba(0,255,65,0.05)]"
+          style={{ scale: profileScale, opacity: profileOpacity, y: profileY, display: profileDisplay }}
+          className="absolute z-10 flex flex-col items-center text-center gap-6 bg-[#0a0a0a] border border-white/10 p-8 md:p-12 rounded-[2rem] w-full max-w-3xl shadow-[0_0_50px_rgba(0,255,65,0.05)]"
         >
           <div className="relative group cursor-pointer shrink-0">
-            {/* Auto-fetches your actual GitHub avatar */}
             <img 
               src="https://github.com/ShushantBuilds.png" 
               alt="Shushant" 
-              className="w-24 h-24 rounded-full border-2 border-[#00ff41]/50 group-hover:border-[#00ff41] transition-colors object-cover"
+              className="w-32 h-32 md:w-40 md:h-40 rounded-full border-2 border-[#00ff41]/50 group-hover:border-[#00ff41] transition-colors object-cover shadow-2xl"
             />
-            <div className="absolute bottom-0 right-0 w-4 h-4 bg-[#00ff41] rounded-full border-2 border-neutral-900 animate-pulse" />
+            <div className="absolute bottom-1 right-2 w-5 h-5 bg-[#00ff41] rounded-full border-4 border-[#0a0a0a] animate-pulse" />
           </div>
           
           <div>
-            <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+            <h2 className="text-3xl md:text-4xl font-bold text-white flex items-center justify-center gap-3">
               Shushant
-              <span className="text-xs bg-white/10 text-neutral-300 px-2 py-1 rounded-full font-mono font-normal">he/him</span>
+              <span className="text-sm bg-white/10 text-neutral-300 px-3 py-1 rounded-full font-mono font-normal">he/him</span>
             </h2>
-            <p className="text-[#00ff41] font-mono text-xs uppercase tracking-widest mt-1 mb-3">
+            <p className="text-[#00ff41] font-mono text-sm uppercase tracking-widest mt-2 mb-4">
               MCA'27 NIT Raipur • @ShushantBuilds
             </p>
-            <p className="text-neutral-400 text-sm leading-relaxed">
+            <p className="text-neutral-300 text-base md:text-lg leading-relaxed max-w-xl mx-auto">
               I'm a student currently studying at NIT Raipur. I'm looking to collaborate on web and app development, currently learning Flutter. <br/>
-              <span className="text-white italic mt-2 block">"Jack of All, King of None."</span>
+              <span className="text-white font-serif italic mt-4 block text-xl">"Jack of All, King of None."</span>
             </p>
           </div>
         </motion.div>
-      </motion.div>
+        
+        {/* 2. THE SCROLL-REVEALED TEXT */}
+        {/* 🚀 FIX 3: Raised to z-30 so it acts as the true foreground layer */}
+        <motion.div
+          style={{ opacity: textOpacity, y: textY, scale: textScale }}
+          className="absolute z-30 text-center flex flex-col items-center w-full pointer-events-none"
+        >
+          <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-[9vw] font-black tracking-tighter leading-[0.85] text-neutral-50 whitespace-nowrap">
+            ENGINEERING
+          </h1>
+          
+          <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-[9vw] font-extrabold tracking-tighter leading-[0.85] text-neutral-300 font-serif italic whitespace-nowrap">
+            THE FUTURE
+          </h1>
+
+          <p className="text-neutral-500 max-w-2xl text-center text-xs md:text-sm uppercase tracking-[0.3em] font-mono pt-8">
+            Full-Stack Web • Embedded Systems • Intelligence
+          </p>
+        </motion.div>
+
+      </div>
     </section>
   );
 }

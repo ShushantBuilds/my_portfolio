@@ -4,22 +4,22 @@ import { motion, useScroll, useVelocity, useTransform, useSpring } from 'framer-
 // 1. ADD IMAGE PATHS HERE (Place your images in the /public folder)
 const projects = [
   { 
-    title: "Cinematic Recommender Engine", 
+    title: "SentinelNet Shield - AI Extension", 
     category: "Full-Stack Web & AI", 
     colSpan: "col-span-1 md:col-span-2",
-    image: "/movie-bg.jpg" // Example: Place movie-bg.jpg in your public folder
+    image: "/pr3.jpg" 
   },
   { 
-    title: "Automated IoT Environment", 
-    category: "C++ & Microcontrollers", 
+    title: "QR Code Generator", 
+    category: "Side Hustle", 
     colSpan: "col-span-1",
-    image: "/iot-bg.jpg" 
+    image: "/pr2.jpg" 
   },
   { 
-    title: "A* Pathfinding Visualizer", 
-    category: "Algorithms & Python", 
+    title: "NearEase - Finding Service Near You", 
+    category: "Frontend & Collaboration", 
     colSpan: "col-span-1 md:col-span-3",
-    image: "/pathfinder-bg.jpg" 
+    image: "/pr1.jpg" 
   }
 ];
 
@@ -61,12 +61,11 @@ export default function Projects() {
             data-magnetic="true"
             className={`glitch-card group relative rounded-3xl overflow-hidden border border-white/10 bg-neutral-900 cursor-pointer ${project.colSpan}`}
           >
-            {/* 🚀 NEW: Background Image with dark overlay */}
             <div className="absolute inset-0 bg-neutral-950/70 group-hover:bg-neutral-950/40 transition-colors duration-500 z-10" />
             <img 
               src={project.image} 
               alt={project.title} 
-              className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700 ease-out"
+              className="absolute inset-0 w-full h-full object-cover object-top opacity-60 group-hover:scale-110 transition-transform duration-700 ease-out"
             />
 
             {/* Content (Z-20 keeps it above the image) */}

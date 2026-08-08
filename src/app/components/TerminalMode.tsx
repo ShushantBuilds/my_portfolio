@@ -6,9 +6,9 @@ type TerminalLine = { type: 'system' | 'user' | 'error' | 'ascii' | 'success'; t
 
 // 1. Define your projects and their actual URLs here
 const PROJECT_DATA = [
-  { id: 1, name: "CINEMATIC RECOMMENDER ENGINE", status: "DEPLOYED", url: "https://github.com/ShushantBABA" }, // Replace with actual URL
-  { id: 2, name: "AUTOMATED IOT ENVIRONMENT", status: "ACTIVE", url: "https://github.com/ShushantBABA" }, // Replace with actual URL
-  { id: 3, name: "A* PATHFINDING VISUALIZER", status: "STANDBY", url: "https://github.com/ShushantBABA" } // Replace with actual URL
+  { id: 1, name: "SENTINELNET SHIELD - AI EXTENSION", status: "DEPLOYED", url: "https://github.com/ShushantBuilds/SentinelNet-Backend" }, // Replace with actual URL
+  { id: 2, name: "NEAREASE - SERVICES NEAR YOU", status: "ACTIVE", url: "https://github.com/ShushantBuilds/nearease-frontend" }, // Replace with actual URL
+  { id: 3, name: "IoT CYBER ATTACK SVM DETECTION", status: "REPOSITORY", url: "https://github.com/ShushantBuilds/IoT-Cyberattack-SVM-Detection" } // Replace with actual URL
 ];
 
 export default function TerminalMode({ onClose }: { onClose: () => void }) {
@@ -123,7 +123,7 @@ export default function TerminalMode({ onClose }: { onClose: () => void }) {
         newLines.push({ type: 'system', text: "AVAILABLE COMMANDS:" });
         newLines.push({ type: 'system', text: "  projects  - View secure project archives (INTERACTIVE)" });
         newLines.push({ type: 'system', text: "  skills    - Load capability matrix" });
-        newLines.push({ type: 'system', text: "  whoami    - Identify current user protocol" });
+        newLines.push({ type: 'system', text: "  whoisdeveloper    - Identify current user protocol" });
         newLines.push({ type: 'system', text: "  clear     - Wipe terminal output" });
         newLines.push({ type: 'system', text: "  gui       - Reboot visual interface (Exit)" });
         break;
@@ -139,9 +139,10 @@ export default function TerminalMode({ onClose }: { onClose: () => void }) {
         newLines.push({ type: 'system', text: "EXTRACTING SKILL MATRIX..." });
         newLines.push({ type: 'success', text: "> C/C++, Python, React, Next.js, FreeRTOS, Embedded IoT, Three.js" });
         break;
-      case 'whoami':
+      case 'whoisdeveloper':
         newLines.push({ type: 'system', text: "USER CLASSIFICATION: GUEST_ENTITY" });
-        newLines.push({ type: 'system', text: "WARNING: UNAUTHORIZED ACCESS ATTEMPT LOGGED." });
+        newLines.push({ type: 'success', text: "HI! I am Shushant. I am currently studying in NIT Raipur" });
+        newLines.push({ type: 'success', text: "I can be your co-developer. Give it a TRY." });
         break;
       case 'clear':
         setLines([]);

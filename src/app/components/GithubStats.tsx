@@ -1,6 +1,11 @@
 'use client';
 import { motion } from 'framer-motion';
-import {GitHubCalendar} from 'react-github-calendar';
+import dynamic from 'next/dynamic';
+
+const GitHubCalendar = dynamic(
+  () => import('react-github-calendar').then((mod) => mod.GitHubCalendar),
+  { ssr: false } // This completely disables server-side rendering for this component
+);
 
 const techStack = [
   "C/C++", "Python", "React.js", "Next.js", "JavaScript", 

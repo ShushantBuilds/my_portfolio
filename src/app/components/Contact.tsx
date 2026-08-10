@@ -22,10 +22,10 @@ export default function Contact() {
   };
   const resetMouse = () => setPosition({ x: 0, y: 0 });
 
-  // EMAILJS CONFIGURATION (Replace these with your actual keys later)
-  const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
-  const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
-  const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+  // Environment Variables
+  const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
+  const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
+  const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
 
   // Handle Review Submission
   const handleReviewSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -99,7 +99,6 @@ export default function Contact() {
               placeholder="Your Name / Alias" 
               className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-neutral-200 font-mono text-sm focus:outline-none focus:border-[#00ff41] transition-colors"
             />
-            {/* Hidden field to differentiate the form type in your email template */}
             <input type="hidden" name="inquiry_type" value="Review" />
             
             <textarea 
@@ -174,7 +173,6 @@ export default function Contact() {
       <div className="absolute bottom-12 flex space-x-8 text-neutral-500 font-mono text-sm uppercase tracking-widest z-20">
         <a href="https://github.com/ShushantBuilds" target="_blank" rel="noreferrer" data-magnetic="true" className="hover:text-white transition-colors">GitHub</a>
         <a href="https://www.linkedin.com/in/shushantgupta/" target="_blank" data-magnetic="true" className="hover:text-white transition-colors">LinkedIn</a>
-        {/* <a href="#" data-magnetic="true" className="hover:text-white transition-colors">Instagram</a> */}
       </div>
     </section>
   );

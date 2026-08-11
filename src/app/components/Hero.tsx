@@ -59,6 +59,16 @@ export default function Hero() {
               I'm a student currently studying at NIT Raipur. I'm looking to collaborate on web and app development, currently learning Flutter. <br/>
               <span className="text-white font-serif italic mt-4 block text-xl">"Jack of All, King of None."</span>
             </p>
+            <div className="mt-6 flex justify-center gap-4">
+              <a 
+                href="/resume.pdf" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="px-5 py-2.5 rounded-full bg-white/5 hover:bg-[#00ff41]/10 border border-white/20 hover:border-[#00ff41]/50 text-white hover:text-[#00ff41] font-mono text-xs uppercase tracking-widest transition-all duration-300 flex items-center gap-2"
+              >
+                <span>[ VIEW CV ]</span>
+              </a>
+            </div>
           </div>
         </motion.div>
         

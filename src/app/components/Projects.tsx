@@ -4,22 +4,22 @@ import { motion, useScroll, useVelocity, useTransform, useSpring } from 'framer-
 // 1. ADD IMAGE PATHS HERE (Place your images in the /public folder)
 const projects = [
   { 
-    title: "SentinelNet Shield - AI Extension", 
-    category: "Full-Stack Web & AI", 
+    title: "NearEase - Finding Services Nearby", 
+    category: "Frontend & Collaboration", 
     colSpan: "col-span-1 md:col-span-2",
+    image: "/pr1.jpg" 
+  },
+  { 
+    title: "SentinelNet Shield - AI Extension", 
+    category: "Side Hustle", 
+    colSpan: "col-span-1",
     image: "/pr3.jpg" 
   },
   { 
-    title: "QR Code Generator", 
-    category: "Side Hustle", 
-    colSpan: "col-span-1",
-    image: "/pr2.jpg" 
-  },
-  { 
-    title: "NearEase - Finding Service Near You", 
-    category: "Frontend & Collaboration", 
+    title: "Project Polaris", 
+    category: "Full-Stack Web & AI", 
     colSpan: "col-span-1 md:col-span-3",
-    image: "/pr1.jpg" 
+    image: "/pr4.jpg" 
   }
 ];
 

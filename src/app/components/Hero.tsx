@@ -10,19 +10,12 @@ export default function Hero() {
     offset: ["start start", "end start"]
   });
 
-  // --- PROFILE CARD PHYSICS ---
-  // Fades out completely and quickly by 10% scroll
   const profileScale = useTransform(scrollYProgress, [0, 0.15], [1, 0.8]);
   const profileOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
   const profileY = useTransform(scrollYProgress, [0, 0.15], [0, -100]);
-  
-  // 🚀 FIX 1: Explicitly removes the profile from the DOM rendering after 15% 
-  // This guarantees absolutely no background "ghosting" or overlapping.
+
   const profileDisplay = useTransform(scrollYProgress, (v) => v > 0.15 ? "none" : "flex");
 
-  // --- TEXT REVEAL PHYSICS ---
-  // Starts fading in AT 15%, strictly AFTER the profile is gone.
-  // Reaches 100% opacity at 25%, solving the "text remains transparent" bug.
   const textOpacity = useTransform(scrollYProgress, [0.15, 0.25], [0, 1]);
   const textY = useTransform(scrollYProgress, [0.15, 0.3], [100, 0]);
   const textScale = useTransform(scrollYProgress, [0.15, 0.3], [0.9, 1]);
@@ -31,9 +24,6 @@ export default function Hero() {
     <section ref={containerRef} className="relative h-[350vh] bg-transparent">
       
       <div className="sticky top-0 h-screen flex flex-col justify-center items-center overflow-hidden px-4 md:px-6">
-
-        {/* 1. THE ENLARGED PROFILE CARD */}
-        {/* 🚀 FIX 2: Lowered to z-10 so it sits behind the text. Added display: profileDisplay */}
         <motion.div
           style={{ scale: profileScale, opacity: profileOpacity, y: profileY, display: profileDisplay }}
           className="absolute z-10 flex flex-col items-center text-center gap-6 bg-[#0a0a0a] border border-white/10 p-8 md:p-12 rounded-[2rem] w-full max-w-3xl shadow-[0_0_50px_rgba(0,255,65,0.05)]"
@@ -61,7 +51,7 @@ export default function Hero() {
             </p>
             <div className="mt-6 flex justify-center gap-4">
               <a 
-                href="/resume.pdf" 
+                href="/Shushant_Resume.pdf" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="px-5 py-2.5 rounded-full bg-white/5 hover:bg-[#00ff41]/10 border border-white/20 hover:border-[#00ff41]/50 text-white hover:text-[#00ff41] font-mono text-xs uppercase tracking-widest transition-all duration-300 flex items-center gap-2"
